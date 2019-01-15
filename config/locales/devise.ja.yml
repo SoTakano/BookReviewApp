@@ -1,6 +1,39 @@
 # Additional translations at https://github.com/plataformatec/devise/wiki/I18n
 
 ja:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "が入力されていません。"
+            password:
+              blank: "が入力されていません。"
+            name:
+              blank: "が入力されていません。"
+        book:
+          attributes:
+            title:
+              blank: "が入力されていません。"
+            author:
+              blank: "が入力されていません。"
+            description:
+              blank: "が入力されていません。"
+    attributes:
+      user:
+        current_password: "現在のパスワード"
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+        remember_me: "ログインを記憶"
+        name: "ユーザー名"
+      book:
+        title: "タイトル"
+        author: "著者"
+        description: "書籍情報"
+    models:
+      user: "ユーザ"
   devise:
     confirmations:
       confirmed: "アカウントが確認されました。ログインしています。"
