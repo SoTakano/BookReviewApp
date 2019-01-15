@@ -1,0 +1,10 @@
+<h1>書籍情報の編集</h1>
+
+<%= simple_form_for @book, :html => { :maltipart => true } do |f| %>
+	<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id]} %>
+	<%= f.file_field :book_img %>
+	<%= f.input :title, label: "Book Title" %>
+	<%= f.input :description %>
+	<%= f.input :author %>
+	<%= f.button :submit %>
+<%end%>

@@ -1,0 +1,56 @@
+<%= link_to "戻る", :back, class: 'btn' %>
+
+<h1><%= @user.name %></h1>
+
+<% if @user == current_user %>
+
+	<%= link_to 'ユーザー情報の編集', edit_user_registration_path, class: 'btn' %>
+	
+<% end %>
+
+<h3>レビューした書籍の一覧：<%= @reviews.count %>件</h3>
+
+<% @reviews.each do |review| %>
+
+	<div class="row">
+
+		<div class="col-md-3">
+
+			<a href="/books/<%= review.book.id %>">
+				<%= image_tag review.book.book_img.url(:book_index), class: "book-review"%>
+			</a>
+
+		</div>
+		<div class="col-md-9">
+
+			<h3><%= link_to review.book.title, book_path(review.book) %></h3>
+			<div class="review-rating" data-score="<%= review.rating %>"></div>
+			<p><%= review.comment %></p>
+
+			<% if user_signed_in? %>
+
+				<% if @user.id == current_user.id %>
+
+					<%= link_to "編集", edit_book_review_path(review.book, review), class: 'btn'%>
+					<%= link_to "削除", book_review_path(review.book, review), method: :delete, data: {confirm: "レビューを削除しますか？"}, class: 'btn' %>
+
+				<% end %>
+
+			<% end %>
+
+		</div>
+
+	</div>
+	<br>
+
+<% end %>
+
+<script>
+	$('.review-rating').raty({
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+			},
+			path: '/assets/'
+	});
+</script>

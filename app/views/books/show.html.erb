@@ -1,0 +1,73 @@
+<%= link_to "戻る", :back, class: "btn" %>
+<br><br>
+<div class="row">
+
+	<div class="col-md-4">
+
+		<%= image_tag @book.book_img.url(:book_show), class: "book-show" %>
+
+	</div>
+
+	<div class="col-md-8">
+		<h2><%= @book.title %></h2>
+		<h3><%= @book.author %></h3>
+		<h4>カテゴリー: <%= @book.category.name %></h4>
+		<h4>評価平均:<%= @average_review %></h4>
+		<div class="average-review-rating" data-score="<%= @average_review %>"></div>
+		<p><%= @book.reviews.count %>件のレビュー</p>
+		<p><%= @book.description %></p>
+		<% if user_signed_in? %>
+
+			<% if @book.user_id == current_user.id %>
+
+				<%= link_to "編集", edit_book_path, class: 'btn' %>
+				<%= link_to "削除", book_path(@book), method: :delete, data: { confirm: "この書籍を削除しますか？" }, class: 'btn' %>
+
+			<% end %>
+
+		<% end %>
+	</div>
+
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+		<br>
+		<%= link_to "レビューを書く", new_book_review_path(@book), class: 'btn' %>
+	</div>
+
+	<div class="col-md-8">
+		<h3>この本のレビュー</h3>
+
+		<% if @book.reviews.count == 0 %>
+
+			<p>この本にはまだレビューがありません</p>
+
+		<% else %>
+
+			<%= render @book.reviews %>
+
+		<% end %>
+
+	</div>
+
+</div>
+
+<script>
+	$('.review-rating').raty({
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+			},
+			path: '/assets/'
+	});
+</script>
+<script type="text/javascript">
+	$('.average-review-rating').raty({
+		readOnly: true,
+		score: function(){
+			return $(this).attr('data-score');
+			},
+			path: '/assets/'
+	});
+</script>

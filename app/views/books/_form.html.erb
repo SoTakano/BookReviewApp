@@ -1,0 +1,15 @@
+<%= simple_form_for @book, :html => { :maltipart => true } do |f| %>
+	<%= select_tag(
+		:category_id,
+		options_for_select(Category.all.map{ |c| [c.name, c.id]}),
+		:prompt => "カテゴリーを選択",
+		:error => "選択してください。")%>
+	<br><br>
+	<%= f.input :title, label: "タイトル", required: true %>
+	<%= f.input :author, label: "著者" %>
+	<%= f.input :description, label: "書籍情報" %>
+	<label>書籍画像</label>
+	<%= f.file_field :book_img%>
+	<br>
+	<%= f.button :submit, "登録する" %>
+<%end%>

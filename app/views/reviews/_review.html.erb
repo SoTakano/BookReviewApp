@@ -1,0 +1,19 @@
+<div>
+
+	<%= link_to review.user.name, "/user/#{ review.user.id }" %>
+	<div class="review-rating" data-score="<%= review.rating %>"></div>
+	<p><%= review.comment %></p>
+
+	<% if user_signed_in? %>
+
+		<% if review.user_id == current_user.id %>
+
+			<%= link_to "編集", edit_book_review_path(review.book, review), class: 'btn'%>
+			<%= link_to "削除", book_review_path(review.book, review), method: :delete, data: {confirm: "レビューを削除しますか？"}, class: 'btn' %>
+
+		<% end %>
+
+	<% end %>
+
+</div>
+<br>
