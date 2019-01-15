@@ -21,6 +21,7 @@ gem 'devise', '~> 4.5'
 gem 'paperclip', '~> 6.1'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'seed_dump'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
